@@ -1,76 +1,106 @@
 import React from 'react';
 import {useState} from 'react'
+import { NavLink } from 'react-router';
+import LoginPage from './LoginPage';
 
 export default function Register(){
-const [formData, setFormData] = useState();
 const [username, setUsername] = useState();
 const [email, setEmail] = useState();
 const [noTelp, setNoTelp] = useState();
 const [password, setPassword] = useState(); 
-const form = [
-    username,
-    email,
-    noTelp,
-    password,
-];
+const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    noTelp: "",
+    password: "",
+})
+
+const handleChange = (e) => {
+    setFormData({
+        ...formData, [e.target.name]: e.target.value,
+    });
+};
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+};
 
     return(
-        <div className='flex w-screen h-full m-10 justify-center'>
-        <div className='w-xl h-xl bg-gray-100 shadow-md rounded-md'>
-        <div className='flex gap-3 flex-col items-center mt-10 mb-10'>
-            <h2 className='text-gray-700 font-bold text-xl mb-10 font-tahoma'>REGISTER</h2>
-            <div className='flex flex-col gap-3'>
-                <input type="text"
-                    id={username}
-                    value={form.username}
-                    placeholder='Username'
-                    className={`w-full h-7 px-2 py-4 bg-gray border-1 rounded-sm`}
-                />
-                <input type="text"
-                        id={email}
-                        value={form.email}
-                        placeholder='Username'
-                        className={`px-2 h-7 py-4 border-1 rounded-sm`}
-                />
-                <input type="text"
-                        id={noTelp}
-                        value={form.noTelp}
-                        placeholder='Nomor Telepon'
-                        className={`h-7 px-2 py-4 border-1 rounded-sm`}
-                />
-                <input type="text"
-                        id={noTelp}
-                        value={form.noTelp}
-                        placeholder='Nomor Telepon'
-                        className={`h-7 px-2 py-4 border-1 rounded-sm`}
-                />
-            </div>
-            
-        </div>
-        </div>
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="flex w-4xl shadow-2xl rounded-2xl overflow-hidden bg-white">
+        {/* Bagian Kiri - Gambar */}
+        <div className="w-1/2">
+          <img
+            src="https://i.pinimg.com/736x/7f/7d/52/7f7d5283dbd87739602030e2023aacee.jpg" 
+            alt="Workshop Motor"
+            className="h-full w-full object-cover"
+          />
         </div>
 
+        {/* Bagian Kanan - Form */}
+        <div className="w-1/2 p-10 flex flex-col justify-around">
+          <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+            <label htmlFor='username'>Username</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+            <div>
+            <label htmlFor='email'>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+            <div>
+            <label htmlFor='noTelp'>No Telepon</label>
+              <input
+                type="text"
+                name="noTelp"
+                placeholder="No Telp"
+                value={formData.noTelp}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+            <div>
+            <label htmlFor='password'>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              />
+            </div>
+
+            <div className="flex justify-between items-center pt-2">
+              <NavLink to="/LoginPage">
+                Already have Account?  Sign In Here
+              </NavLink>
+              <button
+                type="submit"
+                className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     )  
 }
-
-
-{/*<input type="text"
-                    value={form.username}
-                    placeholder='Username'
-                    className='w-m bg-gray-100'
-                />
-                <input type="text"
-                    value={form.noTelp}
-                    placeholder='No Telp'
-                    className='w-m bg-gray-100'
-                />
-                <input type="text"
-                    value={form.email}
-                    placeholder='email'
-                    className='w-m bg-gray-100'
-                />
-                <input type="text"
-                    value={form.password}
-                    placeholder='password'
-                    className='w-m bg-gray-100'
-                />*/}

@@ -10,6 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Register/>
+      <Routes>
+        <Route path="/LoginPage" element={<LoginPage />} />
+      </Routes>
     </BrowserRouter>
 )
 }
