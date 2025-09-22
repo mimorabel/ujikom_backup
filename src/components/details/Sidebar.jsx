@@ -5,6 +5,7 @@ const menu = [
     {name: "Dashboard", icon: <LayoutDashboard/>, path: "/Dashboard"},
     {name: "Login", icon: <DoorOpen/>, path: "/LoginPage"},
     {name: "Register", icon: <User/>, path: "/Register"},
+    
 ]
 
 export default function Sidebar(){

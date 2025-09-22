@@ -8,18 +8,9 @@ import Register from './pages/auth/Register'
 
 function App() {
   return (
-    
-<BrowserRouter>
-    <div className='flex flex-cols'>
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Dashboard/>} />
-        <Route path="/LoginPage" element={<LoginPage />} />
-        <Route path="/Register" element={<Register />} />
-      </Routes>
-    </div>
+    <BrowserRouter>
+      <Register/>
     </BrowserRouter>
-
 )
 }
 
@@ -36,5 +27,14 @@ export default App
     </div>
     </BrowserRouter>*/}
 
-    {/*
+    {/*<BrowserRouter>
+    <div className='flex flex-cols'>
+      <Sidebar />
+      <Routes>
+        <Route path="/" element={<Dashboard/>} />
+        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/Register" element={<Register />} />
+      </Routes>
+    </div>
+    </BrowserRouter>
   */}

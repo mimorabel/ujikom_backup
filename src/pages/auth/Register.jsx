@@ -38,6 +38,12 @@ const form = [
                         placeholder='Nomor Telepon'
                         className={`h-7 px-2 py-4 border-1 rounded-sm`}
                 />
+                <input type="text"
+                        id={noTelp}
+                        value={form.noTelp}
+                        placeholder='Nomor Telepon'
+                        className={`h-7 px-2 py-4 border-1 rounded-sm`}
+                />
             </div>
             
         </div>
