@@ -116,15 +116,29 @@ model penyewaan {
 }
 
 model transaksi {
-  id                 Int     @id @default(autoincrement())
-  penyewaan_id       Int
-  total              Decimal @db.Decimal(10,2)
-  metode_bayar       String
-  status             TransaksiStatus @default(menunggak)
-  tanggal_transaksi  DateTime @db.Date
-
-  penyewaan penyewaan @relation(fields: [penyewaan_id], references: [id])
+  id              Int       @id @default(autoincrement())
+  motor           Motor     @relation(fields: [motorId], references: [id])
+  motorId         Int
+  penyewa         Penyewa   @relation(fields: [penyewaId], references: [id])
+  penyewaId       Int
+  tanggalMulai    DateTime
+  tanggalSelesai  DateTime
+  totalHarga      Int
+  status          String    @default("pending") // pending, selesai, batal
+  invoice         Invoice?
 }
+
+model Invoice {
+  id              Int         @id @default(autoincrement())
+  transaksi       Transaksi   @relation(fields: [transaksiId], references: [id])
+  transaksiId     Int
+  nomorInvoice    String      @unique
+  tanggalInvoice  DateTime    @default(now())
+  totalHarga      Int
+  pemilikShare    Int
+  adminShare      Int
+}
+
 
 enum Role {
   Pemilik

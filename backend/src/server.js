@@ -1,6 +1,7 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import invoiceRoutes from "./routes/invoiceRoutes.js";
 
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -12,6 +13,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/invoice', invoiceRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
