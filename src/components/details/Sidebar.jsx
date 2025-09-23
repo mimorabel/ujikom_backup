@@ -1,11 +1,10 @@
 import { NavLink, Link } from "react-router-dom";
-import { LayoutDashboard, PersonStanding, Paperclip, DoorOpen, User } from "lucide-react";
+import { LayoutDashboard, Bike, File} from "lucide-react";
 
 const menu = [
     {name: "Dashboard", icon: <LayoutDashboard/>, path: "/Dashboard"},
-    {name: "Login", icon: <DoorOpen/>, path: "/LoginPage"},
-    {name: "Register", icon: <User/>, path: "/Register"},
-    
+    {name: "Motor", icon: <Bike />, path: "/MotorList"},
+    {name: "Add Motor", icon: <File />, path: "AddMotor"}
 ]
 
 export default function Sidebar(){

@@ -1,10 +1,11 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [formData, setFormData] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
   });
 
@@ -15,56 +16,76 @@ export default function LoginPage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  {/*const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
     // nanti dipakai buat request ke backend login
+  };*/}
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/api/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      alert("Login berhasil!");
+      navigate("/dashboard"); // redirect
+    } catch (err) {
+      alert(err.response?.data?.message || "Login gagal");
+    }
   };
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100">
-      <div className="flex w-[800px] shadow-2xl rounded-2xl overflow-hidden bg-white">
-        {/* Bagian Kiri - Gambar */}
+      <div className="flex w-4xl shadow-2xl rounded-2xl overflow-hidden bg-white">
+        {/*gambar kiri*/}
         <div className="w-1/2">
           <img
-            src="https://i.pinimg.com/originals/19/71/74/1971744a0e69c7838a3e5e3c2b12e5a0.jpg"
+            src="https://i.pinimg.com/736x/7f/7d/52/7f7d5283dbd87739602030e2023aacee.jpg"
             alt="Workshop Motor"
             className="h-full w-full object-cover"
           />
         </div>
 
-        {/* Bagian Kanan - Form */}
-        <div className="w-1/2 p-10 flex flex-col justify-center">
+        {/*form kanan*/}
+        <div className="w-1/2 p-10 flex flex-col justify-evenly">
           <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-5">
             <div>
+              <label htmlFor='email'>Username</label>
               <input
                 type="text"
-                name="usernameOrEmail"
-                placeholder="Username or Email"
-                value={formData.usernameOrEmail}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
+                required
               />
             </div>
             <div>
+            <label htmlFor='password'>Password</label>
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
+                required
               />
             </div>
-
+        
             <div className="flex justify-between items-center pt-2">
-              <NavLink
-                to="/forgot-password"
-                className="text-sm text-blue-600 hover:underline"
-              >
-                Forgot Password
-              </NavLink>
+              <div className="flex text-sm flex-row gap-1">
+                <NavLink to="/Register" className={`text-sm text-blue-900 hover:underline`}>
+                  Create New Account
+                </NavLink>
+                <p className="text-sm">or</p>
+                <NavLink to="/forgot-password" className={`text-sm text-blue-900 hover:underline`}>
+                  Forgot Password
+                </NavLink>
+              </div>
+              
               <button
                 type="submit"
                 className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition"

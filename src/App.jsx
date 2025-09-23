@@ -1,18 +1,22 @@
 import { useState } from 'react'
 import { BrowserRouter, Router, Route, Routes, useNavigate } from 'react-router-dom'
 import './index.css'
-import LoginPage from './pages/auth/LoginPage'
 import Dashboard from './pages/Dashboard'
 import Sidebar from './components/details/Sidebar'
-import Register from './pages/auth/Register'
+import MotorList from './pages/owner/MotorList'
+import AddMotor from './pages/owner/AddMotor'
 
 function App() {
   return (
     <BrowserRouter>
-      <Register/>
-      <Routes>
-        <Route path="/LoginPage" element={<LoginPage />} />
-      </Routes>
+    <div className='flex flex-row'>
+      <Sidebar />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/MotorList" element={<MotorList />} />
+          <Route path="/AddMotor" element={<AddMotor/>} />
+        </Routes>
+    </div>
     </BrowserRouter>
 )
 }

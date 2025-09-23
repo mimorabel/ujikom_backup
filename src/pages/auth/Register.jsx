@@ -1,19 +1,18 @@
 import React from 'react';
 import {useState} from 'react'
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import LoginPage from './LoginPage';
 
-export default function Register(){
-const [username, setUsername] = useState();
-const [email, setEmail] = useState();
-const [noTelp, setNoTelp] = useState();
-const [password, setPassword] = useState(); 
+export default function Register(){ 
 const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     noTelp: "",
     password: "",
-})
+    role: "",
+});
+
+const navigate = useNavigate();
 
 const handleChange = (e) => {
     setFormData({
@@ -21,9 +20,26 @@ const handleChange = (e) => {
     });
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    try {
+      const res = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message);
+        navigate("/LoginPage");
+      } else {
+        alert(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Failed to register");
+    }
 };
 
     return(
@@ -43,14 +59,14 @@ const handleSubmit = (e) => {
           <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-            <label htmlFor='username'>Username</label>
+            <label htmlFor='name'>Name</label>
               <input
                 type="text"
-                name="username"
-                placeholder="Username"
-                value={formData.username}
+                name="name"
+                placeholder="Name"
+                value={formData.name}
                 onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
               />
             </div>
             <div>
@@ -61,34 +77,52 @@ const handleSubmit = (e) => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
               />
             </div>
             <div>
-            <label htmlFor='noTelp'>No Telepon</label>
-              <input
-                type="text"
-                name="noTelp"
-                placeholder="No Telp"
-                value={formData.noTelp}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-              />
-            </div>
-            <div>
-            <label htmlFor='password'>Password</label>
+              <label htmlFor='password'>Password</label>
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
               />
             </div>
+            <div className='flex flex-row-2 gap-2'>
+              <div>
+                <label htmlFor='noTelp'>No Telepon</label>
+                <input
+                  type="text"
+                  name="noTelp"
+                  placeholder="No Telp"
+                  value={formData.noTelp}
+                  onChange={handleChange}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
+                />
+              </div>
+              <div>
+                <label htmlFor='role'>Role</label>
+                <select
+                  name="role"
+                  placeholder="Role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-none"
+                >
+                  <option disabled>--Pilih Role--</option>
+                  <option value="Pemilik">Pemilik</option>
+                  <option value="Penyewa">Penyewa</option>
+                </select>
+              </div>
+            </div>
+            
+            
 
             <div className="flex justify-between items-center pt-2">
-              <NavLink to="/LoginPage">
+              <NavLink to="/LoginPage" className={`text-sm text-blue-900 hover:underline`}>
                 Already have Account?  Sign In Here
               </NavLink>
               <button
