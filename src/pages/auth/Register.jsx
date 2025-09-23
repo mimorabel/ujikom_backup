@@ -127,7 +127,7 @@ const handleSubmit = async (e) => {
               </NavLink>
               <button
                 type="submit"
-                className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition"
+                className="bg-blue-800 text-white px-6 py-2 rounded-md hover:bg-blue-900 transition"
               >
                 Register
               </button>

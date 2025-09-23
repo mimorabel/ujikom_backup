@@ -5,18 +5,19 @@ import Dashboard from './pages/Dashboard'
 import Sidebar from './components/details/Sidebar'
 import MotorList from './pages/owner/MotorList'
 import AddMotor from './pages/owner/AddMotor'
+import Register from './pages/auth/Register'
+import LoginPage from './pages/auth/LoginPage'
 
 function App() {
   return (
     <BrowserRouter>
-    <div className='flex flex-row'>
-      <Sidebar />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/MotorList" element={<MotorList />} />
           <Route path="/AddMotor" element={<AddMotor/>} />
+          <Route path="/Register" element={<Register />} />
+          <Route path="/LoginPage" element={<LoginPage />} />
         </Routes>
-    </div>
     </BrowserRouter>
 )
 }

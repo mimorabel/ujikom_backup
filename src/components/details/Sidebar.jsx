@@ -11,7 +11,8 @@ export default function Sidebar(){
     return(
         <div className="w-m p-5">
             <div className="">
-                <h2 className="mb-5">Sidebar</h2>
+                <h2 className="font-jersey">motorocky</h2>
+                <p>Rental Motor</p>
             </div>
             <ul className="flex flex-col gap-3 px-5">
                     {menu.map((item, index)=> (

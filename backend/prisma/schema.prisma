@@ -7,10 +7,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id       Int     @id @default(autoincrement())
-  name     String
-  email    String  @unique
-  password String
-  role     String  @default("user")
+model motor {
+  id      Int    @id @default(autoincrement())
+  merk    String
+  jenis   String
+  tipe    String
+  seri    String
+  nopol   String @unique
+  status  String
 }
+
